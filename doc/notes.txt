@@ -1,0 +1,41 @@
+----------------------------------------------------------------------
+# TODO
+* Optimize PPPD related read and writes
+* Optimize HDLC encoding/decoding
+* Use pre-allocated buffers instead of on the fly malloc/free
+* Look into MTU/MRU settings
+
+----------------------------------------------------------------------
+
+# Example SSL->PPPD->SSL communication during establishment of PPP tunnel.
+
+SSL HEADER: Read 8 bytes
+magic:12345678 & len:00000015=21
+
+SSL READ: 21 bytes
+c0 21 01 00 00 13 01 04 05 bb 03 05 c2 23 81 05
+06 b5 8f 97 fe
+
+PPPD WRITE:
+Wrote 40 bytes to PPPD
+7e ff 7d 23 c0 21 7d 21 7d 20 7d 20 7d 33 7d 21
+7d 24 7d 25 bb 7d 23 7d 25 c2 23 81 7d 25 7d 26
+b5 8f 97 7d de 98 86 7e
+
+PPPD READ:
+frm_len=30, pktsize=30
+00 00 00 00 00 00 00 00 c0 21 01 01 00 0e 01 04
+05 4a 05 06 50 67 a1 b9
+
+SSL WRITE:
+12 34 56 78 00 00 00 10 c0 21 01 01 00 0e 01 04
+05 4a 05 06 50 67 a1 b9
+
+
+----------------------------------------------------------------------
+
+
+
+
+
+
